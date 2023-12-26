@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Property List</title>
+</head>
+<body>
+    <h1>Property List</h1>
+    <ul>
+        {% for property in properties %}
+            <li>
+                <strong>{{ property.name }}</strong><br>
+                Address: {{ property.street }} {% if property.unit %}Unit: {{ property.unit }}{% endif %}, {{ property.city }}, {{ property.state }} {{ property.zip_code }}<br>
+                Lot Size: {{ property.lot_size }}<br>
+                Utilities: Gas - {{ property.gas_provider }}, Electric - {{ property.electric_provider }}, Water - {{ property.water_provider }}
+            </li>
+        {% empty %}
+            <li>No properties found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
