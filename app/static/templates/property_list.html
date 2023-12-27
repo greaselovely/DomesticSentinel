@@ -1,24 +1,34 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Property List</title>
-</head>
-<body>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+        <title>Property List</title>
+    </head>
+    <body>
     <h1>Property List</h1>
-    <ul>
-        {% for property in properties %}
+    <div class="list-container">
+    <table class="table table-borderless table-hover">
+        <td>
+        {% for property in items %}
             <li>
-                <strong>{{ property.name }}</strong><br>
-                Address: {{ property.street }} {% if property.unit %}Unit: {{ property.unit }}{% endif %}, {{ property.city }}, {{ property.state }} {{ property.zip_code }}<br>
-                Lot Size: {{ property.lot_size }}<br>
-                Utilities: Gas - {{ property.gas_provider }}, Electric - {{ property.electric_provider }}, Water - {{ property.water_provider }}
+                <td class="list-name">{{ property.name }}</td>
+                <td class="list-details">{{ property.street }}<br> {% if property.unit %} {{ property.unit }}<br> {% endif %}
+                {{ property.city }}, {{ property.state }} {{ property.zip_code }}<br>
+                <a class="list-name">Lot Size: <a>{{ property.lot_size }}<br>
+                <a class="list-name">Gas: </a>{{ property.gas_provider }}<br>
+                <a class="list-name">Electric: </a>{{ property.electric_provider }}<br>
+                <a class="list-name">Water: </a>{{ property.water_provider }}<br>
+                <a href="{{ property.maps_address }}" target="_blank">Directions</a>
+                </td>
             </li>
         {% empty %}
             <li>No properties found.</li>
         {% endfor %}
-    </ul>
+        </td>
+    <table>
+    </div>
 </body>
 </html>
